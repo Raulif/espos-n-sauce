@@ -47,9 +47,12 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           crossOrigin
         ></link>
         <link
-          href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap"
           rel="stylesheet"
         ></link>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+</link>
         <link rel="stylesheet" href="/styles.css"></link>
         <link rel="manifest" href="/manifest.json"></link>
         <meta name="theme-color" content="#ff5733"></meta>

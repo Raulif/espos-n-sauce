@@ -1,7 +1,8 @@
 export const getPrompt = (
   wantedIngredients: string[],
   notWantedIngredients: string[],
-  lastRecipe: string
+  lastRecipe: string,
+  veryDifferent: boolean
 ) =>
   `
   - Hello Gemini, I am preparing a dish with following ingredients: ${wantedIngredients.join(", ")}. 
@@ -14,7 +15,7 @@ export const getPrompt = (
   ${
     lastRecipe?.length
       ? `
-  - You have just suggested this recipe, please suggest now something different:
+  - You have just suggested this recipe, ${veryDifferent ? "please suggest now something dramatically different, a completely different gastronomy style and origin" : "please suggest now something different"} :
     *** LAST RECIPE START ***
     ${lastRecipe}
     *** LAST RECIPE END ***

@@ -4,8 +4,12 @@ export const getSauce = createServerFn({
   method: "GET",
 })
   .validator(
-    (data: { wantedIngredients: string[]; notWantedIngredients: string[]; lastRecipe: string }) =>
-      data
+    (data: {
+      wantedIngredients: string[];
+      notWantedIngredients: string[];
+      lastRecipe: string;
+      veryDifferent: boolean;
+    }) => data
   )
   .handler(async (ctx) => {
     try {

@@ -1,6 +1,141 @@
+:root {
+  --beige: #f3ead9;
+  --orange: #c54800;
+  --dark-organge: #a33f05;
+  --shiny-orange: #ff5733;
+  --gowun: "Gowun Dodum", sans-serif;
+  --amatic: "Amatic SC", sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--beige);
+}
+
+h1 {
+  display: inline-block;
+  color: var(--orange);
+  font-family: var(--amatic);
+  font-size: 48px;
+}
+
+.outer-container {
+  padding: 16px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredients-container ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ingredient-tag {
+  background-color: var(--orange);
+  border-radius: 4px;
+  color: white;
+  font-size: 22px;
+  font-family: var(--gowun);
+  text-transform: capitalize;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+
+.ingredient-tag span {
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.ingredient-remove {
+  border: 0;
+  font-size: 18px;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  cursor: pointer;
+  background-color: white;
+  height: 100%;
+  width: 36px;
+}
+
+.ingredient-remove:hover {
+  background-color: var(--orange);
+  color: white;
+  box-shadow: 2px 2px 0 white;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-container {
+  font-family: var(--gowun);
+}
+
+.input-container .inner-input-container {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-container label,
+.input-container .inner-input-container {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.input-container label {
+  text-transform: capitalize;
+  font-size: 22px;
+}
+
+.input-container input {
+  padding: 10px;
+  font-size: 18px;
+  flex: 1;
+  border: 2px solid var(--orange);
+  border-radius: 4px;
+}
+
+.input-container button {
+  width: 100px;
+  font-size: 24px;
+  background-color: var(--orange);
+  color: white;
+  font-weight: 700;
+  border: 0;
+  box-shadow: 0px 0px 0px black;
+  transition: box-shadow 0.2s ease-in;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  box-shadow: 2px 2px 0px black;
+  background-color: var(--dark-organge);
+}
+
 .not-available-button {
   border: none;
-  color: #ff5733;
+  color: var(--shiny-orange);
   font-weight: 700;
   background-color: transparent;
   cursor: pointer;
