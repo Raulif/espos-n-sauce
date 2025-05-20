@@ -1,0 +1,15 @@
+.not-available-button {
+  border: none;
+  color: #ff5733;
+  font-weight: 700;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.not-available-item {
+  text-decoration: line-through;
+}
+
+.not-available-item button {
+  display: none;
+}
