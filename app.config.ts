@@ -30,7 +30,7 @@ export default defineConfig({
       tsConfigPaths({
         projects: ["./tsconfig.json"],
       }),
-      // copyAppCssToPublic()
+      copyAppCssToPublic()
     ],
   },
 });
