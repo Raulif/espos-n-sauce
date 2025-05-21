@@ -53,9 +53,13 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           rel="stylesheet"
         ></link>
         <link
-          href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Gowun+Dodum&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Inter:wght@400;500&display=swap"
           rel="stylesheet"
         ></link>
+        <script
+          src="https://kit.fontawesome.com/f6d01d0f1a.js"
+          crossOrigin="anonymous"
+        ></script>
         <link rel="manifest" href="/manifest.json"></link>
         <meta name="theme-color" content="#ff5733"></meta>
       </head>

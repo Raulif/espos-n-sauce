@@ -31,11 +31,11 @@ export const getPrompt = (
   - You can use any possible ingredients to make the sauce recipe, not necessarily only from the list of available ingredients which I provided to you.
   - You can however use some of the available ingredients to create the sauce, but please not too much of them, since they are supposed to be the main content of the dish.
   - Please give me detailed description of the recipe of the sauce, as a numbered list of steps.
-  - Please prefix the list of steps with '<STEPS>', so that I can identify them when I parse the response. Use '*' as list marker for each step on the list.
+  - Please prefix the list of steps with '<STEPS>', so that I can identify them when I parse the response. Use '*' as list marker for each step on the list. Please do not make the list of steps numbered.
   - Please give the sauce a title / name, and prefix it with '<TITLE>'.
   - Additionally, I need the list of all the ingredients necessary for the sauce, including the quantities required. Use '*' as list marker for each ingredient on the list.
   - Please prefix the list of ingredients with '<INGREDIENTS_LIST>', so that I can find it when I parse your response.
   - Remove any initial confirmation messages.
-  - PPease use closing tags for '<TITLE>', '<INGREDIENTS_LIST>' and '<STEPS>'.
+  - Please use closing tags for '<TITLE>', '<INGREDIENTS_LIST>' and '<STEPS>'.
   - Thank you very much :) .
   `;

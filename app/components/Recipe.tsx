@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useSauce } from "../hooks/useGetSauce";
 import { useRecipeStore } from "../stores/useRecipeStore";
+import { RecipeIngredient } from "./RecipeIngredient";
 
 export const Recipe = () => {
   const { recipe } = useSauce();
@@ -8,48 +9,35 @@ export const Recipe = () => {
     retrying,
     setRetrying,
     notWantedIngredients,
-    addNotWantedIngredient,
   } = useRecipeStore();
 
-  const onIngredientNotWanted = useCallback((ingredient: string) => {
-    if (!retrying) setRetrying(true);
-    addNotWantedIngredient(ingredient);
-  }, []);
+  useEffect(() => {
+    if (notWantedIngredients?.length && !retrying) setRetrying(true);
+    if (!notWantedIngredients?.length && retrying) setRetrying(false);
+  }, [notWantedIngredients, retrying]);
 
   if (!recipe) return;
   const { title, ingredients, steps } = recipe;
 
   return (
     <>
-      {title && <h3>Recipe:</h3>}
-      {title && <p>Title: {title}</p>}
+      {title && <h3>{title}</h3>}
       {!!ingredients?.length && (
         <>
-          <p>Ingredients</p>
+          <h4>Ingredients</h4>
           <ul>
-            {ingredients.map((ing, ind) => {
-              const notAvailable = notWantedIngredients.includes(ing);
-              return (
-                <li
-                  className={notAvailable ? "not-available-item" : ""}
-                  key={`${ing}-${ind}`}
-                >
-                  <span>{ing}</span>
-                  <button
-                    className="not-available-button"
-                    onClick={() => onIngredientNotWanted(ing)}
-                  >
-                    X
-                  </button>
-                </li>
-              );
-            })}
+            {ingredients.map((ingredient, idx) => (
+              <RecipeIngredient
+                ingredient={ingredient}
+                key={`${ingredient}-${idx}`}
+              />
+            ))}
           </ul>
         </>
       )}
       {!!steps?.length && (
         <>
-          <p>Steps</p>
+          <h4>Steps</h4>
           <ol>
             {steps.map((stp, ind) => (
               <li key={`${stp}-${ind}`}>

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSauce } from "../hooks/useGetSauce";
 import { useRecipeStore } from "../stores/useRecipeStore";
 import { IngredientTag } from "./IngredientTag";
@@ -25,6 +25,15 @@ export const IngredientInput = () => {
     input.current.value = "";
   }, [input.current]);
 
+  useEffect(() => {
+    if (wantedIngredients.length) {
+      const newIngredients = document.querySelectorAll(
+        ".ingredient-tag.hidden"
+      );
+      newIngredients.forEach((tag) => tag.classList.remove('hidden'))
+    }
+  }, [wantedIngredients]);
+
   return (
     <>
       <div className="input-container">
@@ -37,19 +46,24 @@ export const IngredientInput = () => {
         </span>
       </div>
       <div className="ingredients-container">
-        <ul>
+        <ul className="horizontal-list">
           {wantedIngredients.map((ingredient, index) => (
-            <IngredientTag key={`${ingredient}-${index}`} ingredient={ingredient} />
+            <IngredientTag
+              key={`${ingredient}-${index}`}
+              ingredient={ingredient}
+            />
           ))}
         </ul>
       </div>
-      {!recipe?.title && <button
-        disabled={!wantedIngredients.length}
-        className="generate-recipe"
-        onClick={generateRecipe}
-      >
-        Generate Recipe
-      </button>}
+      {!recipe?.title && (
+        <button
+          disabled={!wantedIngredients.length}
+          className="generate-recipe"
+          onClick={generateRecipe}
+        >
+          Generate Recipe
+        </button>
+      )}
     </>
   );
 };

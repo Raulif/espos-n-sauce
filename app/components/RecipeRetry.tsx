@@ -8,8 +8,8 @@ export const RecipeRetry = () => {
   if (!notWantedIngredients?.length) return;
   return (
     <>
-      <h4>Ingredients not available</h4>
-      <ul>
+      <h3>Ingredients not available</h3>
+      <ul className="not-available-list">
         {notWantedIngredients?.map((nwIng, ind) => (
           <li key={`${nwIng}-${ind}`}>
             <span>{nwIng}</span>

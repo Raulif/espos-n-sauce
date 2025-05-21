@@ -15,8 +15,8 @@ function Home() {
         <h1>Espos'n'Sauce</h1>
       </div>
       <IngredientInput />
-      <Recipe />
       <RecipeRetry />
+      <Recipe />
     </div>
   );
 }
