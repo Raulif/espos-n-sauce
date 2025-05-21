@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { useRecipeStore } from "../stores/useRecipeStore";
-import { useSauce } from "../hooks/useGetSauce";
 import { Recipe } from "../components/Recipe";
 import { IngredientInput } from "../components/IngredientInput";
 import { RecipeRetry } from "../components/RecipeRetry";
