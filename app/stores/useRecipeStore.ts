@@ -20,6 +20,7 @@ interface Store {
   wantedIngredients: Array<string>;
   notWantedIngredients: Array<string>;
   veryDifferent: boolean;
+  fetching: boolean;
 }
 
 interface Actions {
@@ -30,6 +31,8 @@ interface Actions {
   removeWantedIngredient: (ingredient: string) => void;
   removeNotWantedIngredient: (ingredient: string) => void;
   setVeryDifferent: (veryDifferent: boolean) => void;
+  setFetching: (fetching: boolean) => void;
+  clearRecipe: () => void;
 }
 
 export const useRecipeStore = create<Store & Actions>()((set) => ({
@@ -38,6 +41,7 @@ export const useRecipeStore = create<Store & Actions>()((set) => ({
   wantedIngredients: [],
   notWantedIngredients: [],
   veryDifferent: false,
+  fetching: false,
   setRecipe: (recipe: Recipe) => set({ recipe }),
   setRetrying: (retrying) => set({ retrying }),
   addWantedIngredient: (ingredient) =>
@@ -73,4 +77,13 @@ export const useRecipeStore = create<Store & Actions>()((set) => ({
       };
     }),
   setVeryDifferent: (veryDifferent) => set({ veryDifferent }),
+  setFetching: (fetching) => set({ fetching }),
+  clearRecipe: () =>
+    set((state) => {
+      if (state.recipe.title) {
+        return { recipe: emptyRecipe };
+      } else {
+        return state;
+      }
+    }),
 }));

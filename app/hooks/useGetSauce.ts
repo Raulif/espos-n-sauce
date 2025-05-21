@@ -12,17 +12,21 @@ export const useSauce = () => {
     wantedIngredients,
     notWantedIngredients,
     veryDifferent,
-    setVeryDifferent
+    setVeryDifferent,
+    setFetching,
+    clearRecipe
   } = useRecipeStore();
 
-  const generateRecipe = useCallback(async () => {
+  const generateRecipe = useCallback(async (isRetry?: boolean) => {
     if (!wantedIngredients?.length) return;
+    setFetching(true)
+    clearRecipe()
 
     const sauceResponse = await getSauce({
       data: {
         wantedIngredients,
         notWantedIngredients,
-        lastRecipe: retrying ? recipe?.rawText : "",
+        lastRecipe: isRetry ? recipe?.rawText : "",
         veryDifferent
       },
     });
@@ -33,8 +37,9 @@ export const useSauce = () => {
     if (veryDifferent) setVeryDifferent(false);
 
     const recipeObject = parseRecipeText(sauceResponse);
+    setFetching(false)
     setRecipe(recipeObject);
   }, [wantedIngredients, notWantedIngredients, recipe?.rawText, retrying]);
 
-  return { recipe, generateRecipe };
+  return {  generateRecipe };
 };

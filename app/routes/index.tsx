@@ -13,9 +13,9 @@ function Home() {
     <div className="outer-container">
       <div className="headline-container">
         <h1>Espos'n'Sauce</h1>
+        <img src="/icon.png" className="chef-icon" alt="chef icon"/>
       </div>
       <IngredientInput />
-      <RecipeRetry />
       <Recipe />
     </div>
   );

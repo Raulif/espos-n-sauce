@@ -56,6 +56,11 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Inter:wght@400;500&display=swap"
           rel="stylesheet"
         ></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+          rel="stylesheet"
+        ></link>
+
         <script
           src="https://kit.fontawesome.com/f6d01d0f1a.js"
           crossOrigin="anonymous"

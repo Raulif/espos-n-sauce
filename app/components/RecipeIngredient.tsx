@@ -6,17 +6,22 @@ export const RecipeIngredient = ({ ingredient }: { ingredient: string }) => {
     removeNotWantedIngredient,
     addNotWantedIngredient,
     notWantedIngredients,
+    setRetrying,
+    retrying,
   } = useRecipeStore();
-  
+
   const notWanted = notWantedIngredients.includes(ingredient);
 
   const onClick = useCallback(() => {
     if (notWanted) {
-      removeNotWantedIngredient(ingredient)
+      removeNotWantedIngredient(ingredient);
     } else {
-      addNotWantedIngredient(ingredient)
+      addNotWantedIngredient(ingredient);
+      if (!retrying) {
+        setRetrying(true);
+      }
     }
-  }, [notWanted, notWantedIngredients]);
+  }, [notWanted, notWantedIngredients, retrying]);
 
   return (
     <li className={notWanted ? "not-available-item" : ""}>
@@ -24,8 +29,9 @@ export const RecipeIngredient = ({ ingredient }: { ingredient: string }) => {
       <button
         className={`not-available-button ${notWanted ? "add-again" : ""}`}
         onClick={onClick}
+        title="toggle ingredient availability"
       >
-        {notWanted ? "+" : "X"}
+        {notWanted ? <i className="fa fa-circle-plus" /> : <i className="fa fa-circle-xmark" />}
       </button>
     </li>
   );
