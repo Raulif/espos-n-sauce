@@ -26,10 +26,7 @@ export const Route = createRootRouteWithContext<{
     ],
     ...(process.env.NODE_ENV === "production"
       ? {
-          links: [
-            { rel: "stylesheet", href: css },
-            { rel: "author", href: "/" },
-          ],
+          links: [{ rel: "stylesheet", href: css }],
         }
       : {}),
   }),
