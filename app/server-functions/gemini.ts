@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { GoogleGenAI } from "@google/genai";
 import { getPrompt } from "../helpers/prompt";
+import type { PromptPayload } from "../types/types";
 
 const GEMINI_MODEL = "gemini-2.0-flash";
 const gemini = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -8,28 +9,10 @@ const gemini = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 export const getRecipeText = createServerFn({
   method: "GET",
 })
-  .validator(
-    (data: {
-      wantedIngredients: string[];
-      notWantedIngredients: string[];
-      lastRecipe: string;
-      veryDifferent: boolean;
-    }) => data
-  )
+  .validator((data: PromptPayload) => data)
   .handler(async (ctx) => {
     try {
-      const {
-        wantedIngredients = [],
-        notWantedIngredients = [],
-        lastRecipe = "",
-        veryDifferent = false
-      } = ctx?.data;
-      const prompt = getPrompt(
-        wantedIngredients,
-        notWantedIngredients,
-        lastRecipe,
-        veryDifferent
-      );
+      const prompt = getPrompt(ctx?.data);
 
       const aiResponse = await gemini.models.generateContent({
         model: GEMINI_MODEL,

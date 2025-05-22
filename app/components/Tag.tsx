@@ -1,15 +1,17 @@
 import { useCallback, useRef } from "react";
-import { useRecipeStore } from "../stores/useRecipeStore";
 
-export const IngredientTag = ({
-  ingredient,
+export const Tag = ({
+  text,
   isTag,
+  onRemove,
+  tagSelector
 }: {
-  ingredient: string;
+  text: string;
   isTag: boolean;
+  tagSelector: string;
+  onRemove: (text: string) => void
 }) => {
   const ref = useRef<HTMLLIElement>(null);
-  const { removeWantedIngredient, fetching } = useRecipeStore();
 
   const onRemoveClick = useCallback(() => {
     const element = ref.current;
@@ -17,22 +19,22 @@ export const IngredientTag = ({
       element.classList.add("hidden");
     }
     setTimeout(() => {
-      removeWantedIngredient(ingredient);
+      onRemove(text);
     }, 200);
   }, [ref.current]);
 
   return isTag ?(
-    <li className="ingredient-tag hidden" ref={ref}>
-      <span>{ingredient}</span>
+    <li className={`tag ${tagSelector} hidden`} ref={ref}>
+      <span>{text}</span>
       <button
-        className="ingredient-remove"
+        className="tag-remove"
         onClick={onRemoveClick}
-        title="remove the ingredient"
+        title="remove"
       >
         <i className="fa fa-circle-xmark" />
       </button>
     </li>
   ) : (
-    <li>{ingredient}</li>
+    <li className={tagSelector}>{text}</li>
   );
 };

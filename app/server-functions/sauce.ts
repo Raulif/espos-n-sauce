@@ -1,15 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRecipeText } from "./gemini";
+import type { PromptPayload } from "../types/types";
+
 export const getSauce = createServerFn({
   method: "GET",
 })
   .validator(
-    (data: {
-      wantedIngredients: string[];
-      notWantedIngredients: string[];
-      lastRecipe: string;
-      veryDifferent: boolean;
-    }) => data
+    (data: PromptPayload) => data
   )
   .handler(async (ctx) => {
     try {

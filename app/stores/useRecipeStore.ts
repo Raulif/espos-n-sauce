@@ -21,6 +21,8 @@ interface Store {
   notWantedIngredients: Array<string>;
   veryDifferent: boolean;
   fetching: boolean;
+  recipeCollection: Array<Recipe>;
+  additionalCharacteristics: Array<string>;
 }
 
 interface Actions {
@@ -33,16 +35,25 @@ interface Actions {
   setVeryDifferent: (veryDifferent: boolean) => void;
   setFetching: (fetching: boolean) => void;
   clearRecipe: () => void;
+  addAdditionalCharacteristic: (characteristic: string) => void;
+  removeAdditionalCharacteristic: (characteristic: string) => void;
 }
 
 export const useRecipeStore = create<Store & Actions>()((set) => ({
   recipe: emptyRecipe,
+  recipeCollection: [],
   retrying: false,
   wantedIngredients: [],
   notWantedIngredients: [],
   veryDifferent: false,
   fetching: false,
-  setRecipe: (recipe: Recipe) => set({ recipe }),
+  additionalCharacteristics: [],
+  setRecipe: (recipe: Recipe) =>
+    set((state) => {
+      const collection = [...state.recipeCollection];
+      collection.push(recipe);
+      return { recipe, recipeCollection: collection };
+    }),
   setRetrying: (retrying) => set({ retrying }),
   addWantedIngredient: (ingredient) =>
     set((state) => {
@@ -85,5 +96,26 @@ export const useRecipeStore = create<Store & Actions>()((set) => ({
       } else {
         return state;
       }
+    }),
+  addAdditionalCharacteristic: (characteristic) =>
+    set((state) => {
+      if (state.additionalCharacteristics.includes(characteristic))
+        return state;
+      return {
+        additionalCharacteristics: [
+          ...state.additionalCharacteristics,
+          characteristic,
+        ],
+      };
+    }),
+  removeAdditionalCharacteristic: (characteristic) =>
+    set((state) => {
+      if (!state.additionalCharacteristics.includes(characteristic))
+        return state;
+      return {
+        additionalCharacteristics: state.additionalCharacteristics.filter(
+          (addCh) => addCh !== characteristic
+        ),
+      };
     }),
 }));

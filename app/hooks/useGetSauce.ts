@@ -14,7 +14,8 @@ export const useSauce = () => {
     veryDifferent,
     setVeryDifferent,
     setFetching,
-    clearRecipe
+    clearRecipe,
+    recipeCollection
   } = useRecipeStore();
 
   const generateRecipe = useCallback(async (isRetry?: boolean) => {
@@ -26,8 +27,9 @@ export const useSauce = () => {
       data: {
         wantedIngredients,
         notWantedIngredients,
-        lastRecipe: isRetry ? recipe?.rawText : "",
-        veryDifferent
+        lastRecipes: isRetry ? recipeCollection.map(r => r.rawText) : [],
+        veryDifferent,
+        additionalCharacteristics: []
       },
     });
 
