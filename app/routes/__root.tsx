@@ -24,7 +24,14 @@ export const Route = createRootRouteWithContext<{
         title: "EsposonSauce",
       },
     ],
-    links: [{ rel: "stylesheet", href: css }],
+    ...(process.env.NODE_ENV === "production"
+      ? {
+          links: [
+            { rel: "stylesheet", href: css },
+            { rel: "author", href: "/" },
+          ],
+        }
+      : {}),
   }),
   component: RootComponent,
 });
