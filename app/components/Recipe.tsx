@@ -1,7 +1,8 @@
 import { useRecipeStore } from "../stores/useRecipeStore";
 import { RecipeIngredient } from "./RecipeIngredient";
-import { RecipeRetry } from "./RecipeRetry";
 import { AnimatedHeightContainer } from "./AnimatedHeightContainer";
+import { NotWantedIngredientsList } from "./NotWantedIngredientsList";
+import { RecipeSteps } from "./RecipeSteps";
 
 export const Recipe = () => {
   const { recipe, retrying, notWantedIngredients } = useRecipeStore();
@@ -9,13 +10,14 @@ export const Recipe = () => {
   const { title, ingredients, steps } = recipe;
 
   return (
-    <AnimatedHeightContainer show={!!title}>
+    <AnimatedHeightContainer show={!!title} classes="recipe-container">
       {title && <h3>{title}</h3>}
       {!!ingredients?.length && (
-        <>
+        <div className="recipe-ingredients-container">
           <p>
-            You can select which ingredients you don't have or don't want, and
-            generate a new sauce
+            You can <span className="highlight">select</span> which ingredients
+            you don't have or don't want, and
+            <span className="highlight"> generate</span> a new sauce
           </p>
           <h4>Ingredients</h4>
           <ul className="recipe-ingredients">
@@ -26,28 +28,12 @@ export const Recipe = () => {
               />
             ))}
           </ul>
-        </>
+        </div>
       )}
-      <AnimatedHeightContainer
-        show={!!notWantedIngredients?.length && retrying}
-      >
-        <RecipeRetry />
-      </AnimatedHeightContainer>
 
-      <AnimatedHeightContainer show={!retrying}>
-        {!!steps.length && (
-          <>
-            <h4>Steps</h4>
-            <ol>
-              {steps.map((stp, ind) => (
-                <li key={`${stp}-${ind}`}>
-                  <span>{stp}</span>
-                </li>
-              ))}
-            </ol>
-          </>
-        )}
-      </AnimatedHeightContainer>
+      <NotWantedIngredientsList />
+
+      <RecipeSteps />
     </AnimatedHeightContainer>
   );
 };

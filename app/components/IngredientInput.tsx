@@ -4,7 +4,13 @@ import { useRecipeStore } from "../stores/useRecipeStore";
 import { IngredientTag } from "./IngredientTag";
 
 export const IngredientInput = () => {
-  const { wantedIngredients, addWantedIngredient, fetching, clearRecipe, recipe } = useRecipeStore();
+  const {
+    wantedIngredients,
+    addWantedIngredient,
+    fetching,
+    clearRecipe,
+    recipe,
+  } = useRecipeStore();
   const { generateRecipe } = useSauce();
   const input = useRef<HTMLInputElement>(null);
 
@@ -14,7 +20,7 @@ export const IngredientInput = () => {
       if (e.key === "Enter") {
         addWantedIngredient(input.current.value);
         input.current.value = "";
-       clearRecipe()
+        clearRecipe();
       }
     },
     [input.current]
@@ -24,7 +30,7 @@ export const IngredientInput = () => {
     if (!input.current?.value) return;
     addWantedIngredient(input.current.value);
     input.current.value = "";
-    clearRecipe()
+    clearRecipe();
   }, [input.current]);
 
   useEffect(() => {
@@ -53,7 +59,7 @@ export const IngredientInput = () => {
       </div>
       <div className="ingredients-container">
         <ul className="horizontal-list">
-        Ingredients:
+          <span className="full-width-mobile">Ingredients:</span>
           {wantedIngredients.map((ingredient, index) => (
             <IngredientTag
               key={`${ingredient}-${index}`}
@@ -76,7 +82,7 @@ export const IngredientInput = () => {
             </>
           ) : (
             <>
-              Generate Recipe
+              Generate Sauce
               {wantedIngredients.length ? <i className="fa fa-rocket" /> : ""}
             </>
           )}

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Recipe } from "../components/Recipe";
 import { IngredientInput } from "../components/IngredientInput";
+import { RetryActions } from "../components/RetryActions";
 import "../styles/global.css";
 
 export const Route = createFileRoute("/")({
@@ -17,6 +18,7 @@ function Home() {
       </div>
       <IngredientInput />
       <Recipe />
+      <RetryActions />
     </div>
   );
 }

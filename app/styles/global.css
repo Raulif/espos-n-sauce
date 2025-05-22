@@ -55,14 +55,14 @@ button.button {
   font-family: "Fredoka", cursive;
 }
 
-button.button:hover:not(:disabled) {
+button.button:hover {
   background: #e76f51;
 }
 
-button.button:disabled,
-button.button:disabled:hover {
+button.button:disabled {
   background-color: lightgrey;
   cursor: auto;
+  pointer-events: none;
 }
 
 button.ghost-button {
@@ -86,10 +86,21 @@ button.ghost-button:hover {
   color: #e76f51;
 }
 
+button.ghost-button:disabled {
+  border-color: lightgray;
+  color: lightgray;
+  pointer-events: none;
+}
+
 button.ghost-button.active {
   background-color: #e76f51;
   color: white;
   border-color: #e76f51;
+}
+
+.highlight {
+  color: #e76f51;
+  font-weight: 700;
 }
 
 .very-different-label {
@@ -145,13 +156,17 @@ input#ingredient-input {
   background: #e76f51;
 }
 
+.ingredients-container {
+  display: flex;
+  gap: 16px;
+}
+
 .ingredients-container ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 4px 8px;
   padding-left: 0;
   list-style: none;
-  margin-bottom: 1rem;
 }
 
 .ingredients-container ul li:not(.ingredient-tag) {
@@ -222,7 +237,7 @@ input#ingredient-input {
 }
 
 h3 {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   font-size: 1.5rem;
   color: #e76f51;
 }
@@ -258,12 +273,11 @@ ul.horizontal-list,
 ol.horizontal-list {
   flex-direction: row;
   align-items: center;
+  margin: 0;
 }
 
-ul.not-available-list {
-  padding: 0;
-  margin: 0 0 32px;
-  list-style: none;
+.not-available-list {
+  gap: 8px;
 }
 
 .not-available-button {
@@ -295,15 +309,24 @@ ul.not-available-list {
   background-color: green;
 }
 
-.not-available-item {
+.not-available-item span {
   text-decoration: line-through;
   opacity: 0.6;
 }
 
-.recipe-retry-actions {
+.recipe-retry {
   display: flex;
   gap: 16px;
   align-items: center;
+  margin-top: 32px;
+}
+
+.retry-button {
+  flex-shrink: 0;
+}
+
+.recipe-steps-container {
+  margin-top: 28px;
 }
 
 @media (max-width: 600px) {
@@ -334,6 +357,10 @@ ul.not-available-list {
     height: 53px;
   }
 
+  .recipe-ingredients-container h4 {
+    margin-top: 28px;
+  }
+
   .recipe-container .recipe-ingredients {
     padding-left: 0;
     margin-left: 0;
@@ -347,7 +374,7 @@ ul.not-available-list {
   .recipe-container .recipe-ingredients li {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
     padding-bottom: 8px;
   }
 
@@ -359,6 +386,19 @@ ul.not-available-list {
     flex-basis: 1;
     flex-shrink: 0;
     margin-right: 0;
+  }
+
+  .ingredients-container {
+    flex-direction: column;
+  }
+
+  .ingredients-container .generate-recipe.button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .full-width-mobile {
+    width: 100%;
   }
 }
 

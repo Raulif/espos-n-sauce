@@ -50,7 +50,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin=""
+          crossOrigin="anonymous"
         ></link>
         <link
           href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap"
@@ -71,6 +71,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         ></script>
         <link rel="manifest" href="/manifest.json"></link>
         <meta name="theme-color" content="#ff5733"></meta>
+        <link rel="icon" href="/icon.png"></link>
       </head>
       <body>
         {children}
