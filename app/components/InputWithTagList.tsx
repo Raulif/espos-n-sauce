@@ -50,7 +50,7 @@ export const InputWithTagList = ({
         </label>
         <span className="inner-input-container">
           <input id={id} onKeyDown={onChangeCallback} ref={input} />
-          <button disabled={!input.current?.value} onClick={callback} title="Add element" className="button">
+          <button onClick={callback} title="Add element" className="button">
             <i className="fa fa-plus"></i>
           </button>
         </span>
