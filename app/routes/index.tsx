@@ -2,11 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Recipe } from "../components/Recipe";
 import { RetryActions } from "../components/RetryActions";
-import "../styles/global.css";
 import { GenerateButton } from "../components/GenerateButton";
 import { InputWithTagList } from "../components/InputWithTagList";
 import { useRecipeStore } from "../stores/useRecipeStore";
 import { useEffect } from "react";
+import { RadioButtons } from "../components/RadioButtons";
+
+import "../styles/global.css";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -20,15 +22,16 @@ function Home() {
     removeAdditionalCharacteristic,
     removeWantedIngredient,
     additionalCharacteristics,
+    setDifficulty,
   } = useRecipeStore();
 
-   useEffect(() => {
-      if (wantedIngredients.length || additionalCharacteristics.length) {
-        const newItems = document.querySelectorAll(".tag.hidden");
-        newItems.forEach((item) => item.classList.remove("hidden"));
-      }
-    }, [wantedIngredients, additionalCharacteristics]);
-    
+  useEffect(() => {
+    if (wantedIngredients.length || additionalCharacteristics.length) {
+      const newItems = document.querySelectorAll(".tag.hidden");
+      newItems.forEach((item) => item.classList.remove("hidden"));
+    }
+  }, [wantedIngredients, additionalCharacteristics]);
+
   return (
     <div className="outer-container">
       <div className="headline-container">
@@ -55,7 +58,16 @@ function Home() {
         tagSelector="characteristic-tag"
         onRemove={removeAdditionalCharacteristic}
       />
-
+      <RadioButtons
+        label="Choose your difficulty"
+        options={[
+          { value: "easy", label: "Beginner" },
+          { value: "medium", label: "Home cook" },
+          { value: "hard", label: "Pro chef" },
+        ]}
+        id="difficulty"
+        callback={setDifficulty}
+      />
       <GenerateButton />
       <Recipe />
       <RetryActions />

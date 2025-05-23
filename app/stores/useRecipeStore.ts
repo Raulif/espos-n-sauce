@@ -23,6 +23,7 @@ interface Store {
   fetching: boolean;
   recipeCollection: Array<Recipe>;
   additionalCharacteristics: Array<string>;
+  difficulty: string;
 }
 
 interface Actions {
@@ -37,6 +38,7 @@ interface Actions {
   clearRecipe: () => void;
   addAdditionalCharacteristic: (characteristic: string) => void;
   removeAdditionalCharacteristic: (characteristic: string) => void;
+  setDifficulty: (diffulty: string) => void;
 }
 
 export const useRecipeStore = create<Store & Actions>()((set) => ({
@@ -48,6 +50,7 @@ export const useRecipeStore = create<Store & Actions>()((set) => ({
   veryDifferent: false,
   fetching: false,
   additionalCharacteristics: [],
+  difficulty: '',
   setRecipe: (recipe: Recipe) =>
     set((state) => {
       const collection = [...state.recipeCollection];
@@ -118,4 +121,5 @@ export const useRecipeStore = create<Store & Actions>()((set) => ({
         ),
       };
     }),
+    setDifficulty: (difficulty) => set({difficulty})
 }));

@@ -19,7 +19,7 @@ export const RetryActions = () => {
       >
         Try again
       </AnimatedButton>
-   
+
       <button
         disabled={fetching}
         title="toggle trying a very different recipe"

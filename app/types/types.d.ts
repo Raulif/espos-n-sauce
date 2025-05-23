@@ -4,4 +4,5 @@ export type PromptPayload = {
   lastRecipes: string[];
   veryDifferent: boolean;
   additionalCharacteristics: string[];
+  difficulty: string;
 };

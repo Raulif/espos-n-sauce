@@ -15,33 +15,46 @@ export const useSauce = () => {
     setVeryDifferent,
     setFetching,
     clearRecipe,
-    recipeCollection
+    recipeCollection,
+    difficulty,
+    setDifficulty,
   } = useRecipeStore();
 
-  const generateRecipe = useCallback(async (isRetry?: boolean) => {
-    if (!wantedIngredients?.length) return;
-    setFetching(true)
-    clearRecipe()
+  const generateRecipe = useCallback(
+    async (isRetry?: boolean) => {
+      if (!wantedIngredients?.length) return;
+      setFetching(true);
+      clearRecipe();
 
-    const sauceResponse = await getSauce({
-      data: {
-        wantedIngredients,
-        notWantedIngredients,
-        lastRecipes: isRetry ? recipeCollection.map(r => r.rawText) : [],
-        veryDifferent,
-        additionalCharacteristics: []
-      },
-    });
+      const sauceResponse = await getSauce({
+        data: {
+          wantedIngredients,
+          notWantedIngredients,
+          lastRecipes: isRetry ? recipeCollection.map((r) => r.rawText) : [],
+          veryDifferent,
+          additionalCharacteristics: [],
+          difficulty,
+        },
+      });
 
-    if (!sauceResponse) return;
+      if (!sauceResponse) return;
 
-    if (retrying) setRetrying(false);
-    if (veryDifferent) setVeryDifferent(false);
+      if (retrying) setRetrying(false);
+      if (veryDifferent) setVeryDifferent(false);
 
-    const recipeObject = parseRecipeText(sauceResponse);
-    setFetching(false)
-    setRecipe(recipeObject);
-  }, [wantedIngredients, notWantedIngredients, recipe?.rawText, retrying]);
+      const recipeObject = parseRecipeText(sauceResponse);
+      setFetching(false);
+      setRecipe(recipeObject);
+    },
+    [
+      wantedIngredients,
+      notWantedIngredients,
+      recipe?.rawText,
+      retrying,
+      difficulty,
+      veryDifferent,
+    ]
+  );
 
-  return {  generateRecipe };
+  return { generateRecipe };
 };

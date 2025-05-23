@@ -1,11 +1,19 @@
 import { PromptPayload } from "../types/types";
 
+const mapDifficultyToText = {
+  easy: 'The recipie of the sauce you come up with should be fairly quick and easy, not very complex.',
+  medium: 'The recipe of the sauce you come up with should be a bit challenging and exciting, something that could be found in a restaurant, but not overly complex.',
+  hard: 'The recipe of the sauce you come up with should be complex and challenging. Something a fine-dining restaurant would prepare, appropriate for a special occasion.'
+}
+
+
 export const getPrompt = ({
   wantedIngredients = [],
   notWantedIngredients = [],
   lastRecipes = [],
   veryDifferent = false,
   additionalCharacteristics = [],
+  difficulty = ''
 }: PromptPayload) =>
   `
   - Hello Gemini, I am preparing a dish with following ingredients: ${wantedIngredients.join(", ")}.
@@ -26,7 +34,7 @@ export const getPrompt = ({
       ${lastRecipe}
       *** PREVIOUS RECIPE #${idx + 1} END ***
     `)}
-     ${veryDifferent ? "please suggest now something dramatically different, a completely different gastronomy style and origin" : "please suggest now something different"}.
+     ${veryDifferent ? "please suggest now something dramatically different, a completely different gastronomy style and origin, go really crazy, but keeping it delicious" : "please suggest now something different"}.
     `
       : ""
   }
@@ -39,6 +47,7 @@ export const getPrompt = ({
   - You can use any possible ingredients to make the sauce recipe, not necessarily only from the list of available ingredients which I provided to you.
   - You can however use some of the available ingredients to create the sauce, but please not too much of them, since they are supposed to be the main content of the dish.
   ${additionalCharacteristics.length ? `- The sauce you come up with must also these characteristics: ${additionalCharacteristics.join(', ')}.` : ''}
+  ${difficulty ? mapDifficultyToText[difficulty] : ''}
   - Please give me detailed description of the recipe of the sauce, as a numbered list of steps.
   - Please prefix the list of steps with '<STEPS>', so that I can identify them when I parse the response. Use '*' as list marker for each step on the list. Please do not make the list of steps numbered.
   - Please give the sauce a title / name, and prefix it with '<TITLE>'.

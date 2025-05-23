@@ -18,7 +18,7 @@ export const GenerateButton = () => {
         ) : (
           <>
             Generate Sauce
-            {wantedIngredients.length ? <i className="fa fa-rocket" /> : ""}
+            {wantedIngredients.length ? <i className="fa fa-fire" /> : ""}
           </>
         )}
       </button>
