@@ -5,6 +5,54 @@
   --brown: #d19f93;
   --light-brown: #ffe0b2;
 }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-second {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(540deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    color: var(--light-orange);
+  }
+
+  50% {
+    color: var(--orange);
+  }
+
+  100% {
+    color: var(--light-orange);
+  }
+}
+
+@keyframes pulse-white {
+  0% {
+    color: white;
+  }
+
+  50% {
+    color: var(--light-orange);
+  }
+
+  100% {
+    color: white;
+  }
+}
+
 body {
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
@@ -104,6 +152,10 @@ button.ghost-button.active {
   border-color: var(--orange);
 }
 
+button.ghost-button.active i {
+  animation: pulse-white 2s linear infinite forwards;
+}
+
 .highlight {
   color: var(--orange);
   font-weight: 700;
@@ -129,7 +181,6 @@ button.ghost-button.active {
 .input-container {
   margin-bottom: 1rem;
 }
-
 
 .input-container label {
   margin-bottom: 0.5rem;
@@ -354,7 +405,7 @@ ol.horizontal-list {
   opacity: 0.6;
 }
 
-.recipe-retry {
+.retry-actions {
   display: flex;
   gap: 16px;
   align-items: center;
@@ -368,6 +419,89 @@ ol.horizontal-list {
 .recipe-steps-container {
   margin-top: 28px;
 }
+
+.animated-button {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--light-orange);
+  line-height: 1rem;
+  font-family: "Fredoka", cursive;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.25s ease-in;
+}
+
+.animated-button .inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 3px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  background-color: var(--light-orange);
+  cursor: pointer;
+  transition: all 0.25s ease-in;
+}
+
+.animated-button .inner:hover {
+  background-color: white;
+  color: var(--orange);
+}
+
+.animated-button.animate .inner:not(:hover) {
+  animation: pulse 1.5s linear forwards infinite;
+  color: var(--orange);
+  background-color: white;
+}
+
+.animated-button.animate:hover {
+  background-color: var(--orange);
+}
+
+.animated-button.animate:not(:hover)::before {
+  content: "";
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--light-orange) 0%,
+    var(--orange) 15%,
+    var(--orange) 100%
+  );
+  height: 300px;
+  width: 20px;
+  position: absolute;
+  animation: rotate 3s linear forwards infinite;
+  z-index: 0;
+  transform-origin: top center;
+  top: 50%;
+  transform: translate(0);
+}
+
+/* .animated-button.animate::after {
+  content: "";
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--light-orange) 0%,
+    var(--orange) 15%,
+    var(--orange) 100%
+
+  );
+  height: 300px;
+  width: 20px;
+  position: absolute;
+  transform: rotate(180deg);
+  animation: rotate-second 3s linear forwards infinite;
+  z-index: 0;
+  transform-origin: top center;
+  top: 50%;
+}  */
 
 @media (max-width: 600px) {
   body {
@@ -441,21 +575,17 @@ ol.horizontal-list {
     width: 100%;
   }
 
-  .retry-button {
-    flex: 1;
+  .retry-actions {
+    flex-direction: column-reverse;
+  }
+
+  .retry-actions button {
+    width: 100%;
+    align-items: center;
     justify-content: center;
   }
 }
 
 .fa-arrows-rotate {
   animation: 1s linear infinite rotate;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

@@ -1,5 +1,6 @@
 import { useSauce } from "../hooks/useGetSauce";
 import { useRecipeStore } from "../stores/useRecipeStore";
+import { AnimatedButton } from "./AnimatedButton";
 
 export const RetryActions = () => {
   const { generateRecipe } = useSauce();
@@ -9,14 +10,16 @@ export const RetryActions = () => {
   if (!recipe.title) return;
 
   return (
-    <div className="recipe-retry">
-      <button
-        className="button retry-button"
-        onClick={() => generateRecipe(true)}
+    <div className="retry-actions">
+      <AnimatedButton
         disabled={fetching}
+        animate={veryDifferent}
+        onClick={() => generateRecipe(true)}
+        classes="retry-button"
       >
         Try again
-      </button>
+      </AnimatedButton>
+   
       <button
         disabled={fetching}
         title="toggle trying a very different recipe"
@@ -24,10 +27,8 @@ export const RetryActions = () => {
         className={`very-different ghost-button ${veryDifferent ? "active" : ""}`}
       >
         <i className="fa fa-wand-magic-sparkles" />
+        Make it very different
       </button>
-      {veryDifferent && (
-        <span className="very-different-label">Surprise me!</span>
-      )}
     </div>
   );
 };
